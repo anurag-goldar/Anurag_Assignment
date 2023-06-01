@@ -1,0 +1,27 @@
+import heapq
+
+def optimal_merge_patterns(files):
+    heap = files[:]  # Create a min-heap with the sizes of the files
+    heapq.heapify(heap)
+    total_cost = 0
+
+    while len(heap) > 1:
+        # Extract the two smallest files from the heap
+        file1 = heapq.heappop(heap)
+        file2 = heapq.heappop(heap)
+
+        # Merge the two files
+        merged_file = file1 + file2
+
+        # Update the total cost
+        total_cost += merged_file
+
+        # Add the merged file back to the heap
+        heapq.heappush(heap, merged_file)
+
+    return total_cost
+
+# Test the algorithm
+files = [10, 5, 20, 2, 4, 8]
+cost = optimal_merge_patterns(files)
+print("Total cost:", cost)
